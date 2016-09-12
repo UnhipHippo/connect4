@@ -76,4 +76,3 @@ class FourInARowBoard(object):
                     break
             else:
                 self._winner = self._board[index]
-    
