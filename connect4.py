@@ -1,10 +1,10 @@
 
 NUM_COL = 8
 NUM_ROW = 7
-EMPTY = ' '
+EMPTY = '&nbsp;&nbsp;'
 RED = 'R'
 YELLOW = 'Y'
-SIDE_EDGE = '\n'
+SIDE_EDGE = '<br>'
 
 DIRECTIONS = [NUM_COL, +1, NUM_COL-1, NUM_COL+1]
 
@@ -56,23 +56,19 @@ class FourInARowBoard(object):
              self._player = RED
         return '%s players\' turn' % (self._player)
 
-
-    @property
     def _all_squares(self):
         start = NUM_COL * NUM_ROW -1
         return range(start,-1,-1)
 
     def _check_winner(self):
-        for index in self._all_squares: 
+        for index in self._all_squares():
             if self._board[index] == self._player:
                 self._check_index_winner(index)
                 
     def _check_index_winner(self, index):
         for direction in DIRECTIONS:               
             for distance in range(4):
-                #print index+direction*distance, self._board[index+direction*distance]
                 if self._board[index + direction*distance] != self._board[index]:
-                    #print 'break'
                     break
             else:
                 self._winner = self._board[index]
