@@ -1,3 +1,4 @@
+
 from connect4 import FourInARowBoard
 x = [1,2,3,3,3,4,4,4,2,5,4]
 
@@ -33,7 +34,7 @@ def test_yellow_win():
         print s.make_move(7)
         print s
 
-def play_game():
+def play_game(): 
     s = FourInARowBoard()
     print s
     while not s._winner:
@@ -46,3 +47,4 @@ def play_game():
 #test_diagonal_win()
 #test_yellow_win()
 #play_game()
+
