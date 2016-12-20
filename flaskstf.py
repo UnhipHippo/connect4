@@ -7,7 +7,10 @@ s = FourInARowBoard()
 @app.route('/board/<mov>')
 def connect4_online(mov):
     mov = int(mov)
+    while s._winner:
+        return "END!!!"
     return str(s.make_move(mov)) + '<br>' + SUBMIT + '<br>' + str(s)
+
 
 @app.route('/move', methods = ['POST','GET'])
 def login():
