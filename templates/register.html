@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+   <body>
+
+      <h1>Input your new username and password</h1>
+
+      <form action = "" method = post>
+         <dl>
+            <dt>Username:</dt>
+
+            <dd>
+               <input type = text name = username
+                  value = "{{request.form.username }}">
+            </dd>
+
+            <dt>Password:</dt>
+            <dd><input type = password name = password></dd>
+         </dl>
+         <p><input type = submit value = Register></p>
+      </form>
+
+   </body>
+</html>

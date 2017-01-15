@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>circle</title>
+        <style type="text/css">
+            .circle_red {
+                width:1%;
+                padding:10px 11px;
+                margin:0 auto;
+                border:2px solid #a1a1a1;
+                border-radius:100%;
+                background-color:red;
+            }
+        </style>
+    </head>
+    <head>
+        <title>circle</title>
+        <style type="text/css">
+            .circle_yellow {
+                width:1%;
+                padding:10px 11px;
+                margin:0 auto;
+                border:2px solid #a1a1a1;
+                border-radius:100%;
+                background-color:yellow;
+            }
+        </style>
+    </head>
+    <head>
+        <title>circle</title>
+        <style type="text/css">
+            .circle_clear {
+                width:1%;
+                padding:10px 11px;
+                margin:0 auto;
+                border:2px solid #a1a1a1;
+                border-radius:100%;
+                background-color:white;
+            }
+        </style>
+    </head>
+<head>
+<style>
+table,tr {
+    border-collapse: collapse;
+    border-radius:200%
+}
+</style>
+</head>
+<body>
+    <table border = 1>
+        {% for row in result %}
+            <tr>
+                {% for column in row %}
+                        <td>
+                            {% if column == 'R' %}
+                                <div class="circle_red"></div>
+                            {% elif column == 'Y' %}
+                                <div class="circle_yellow"></div>
+                            {% else %}
+                                <div class="circle_clear"></div>
+                            {% endif %}
+                        </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+
+<head>
+<style>
+.button {
+    background-color: #4CAF50; /* Green */
+    border: 1px solid green;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    float: left;
+}
+
+.button:hover {
+    background-color: #3e8e41;
+}
+</style>
+</head>
+<body>
+
+{% for number in range(1,8) %}
+    <a href = 'http://localhost:5000/board/{{number}}'><button class="button">{{number}}</button></a>
+{% endfor %}
+</body>
+
+
+</html>

@@ -1,10 +1,10 @@
 
 NUM_COL = 8
 NUM_ROW = 7
-EMPTY = '&nbsp;&nbsp;'
+EMPTY = " "
 RED = 'R'
 YELLOW = 'Y'
-SIDE_EDGE = '<br>'
+SIDE_EDGE = "\n"
 
 DIRECTIONS = [NUM_COL, +1, NUM_COL-1, NUM_COL+1]
 
@@ -48,6 +48,16 @@ class FourInARowBoard(object):
                 break
         else:
             raise InvalidMove()
+
+    def listify(self):
+        newlist = []
+        for row in range(1,NUM_ROW):
+            lst = []
+            for column in range(NUM_COL-1,0,-1):
+                lst.append(self._board[(row-1)*NUM_COL+column-1])
+            newlist.append(lst)
+        return newlist
+
 
     def _swap_player(self):
         if self._player == RED:
