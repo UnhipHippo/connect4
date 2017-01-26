@@ -33,7 +33,7 @@ class FourInARowBoard(object):
           self._board[NUM_ROW * NUM_COL - column - 1] = str(column)
         for row in range(NUM_ROW):
             self._board[(row + 1) * NUM_COL - 1] = SIDE_EDGE
-      
+
     def __str__(self):
         return '|' + '|'.join(self._board)
 

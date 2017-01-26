@@ -39,6 +39,18 @@
             }
         </style>
     </head>
+    <head>
+    <script>
+        function doPoll(){
+            $.post('ajax/test.html', function(data) {
+                alert(data);  // process results here
+                setTimeout(doPoll,5000);
+        });
+    }
+
+
+    </script>
+    </head>
 <head>
 <style>
 table,tr {
@@ -85,12 +97,17 @@ table,tr {
 .button:hover {
     background-color: #3e8e41;
 }
+.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
 </style>
 </head>
 <body>
 
 {% for number in range(1,8) %}
-    <a href = 'http://192.168.1.69:5000/board/{{player}}/{{self}}/{{number}}'><button class="button">{{number}}</button></a>
+    <a><button class="button disabled">{{number}}</button></a>
 {% endfor %}
 </body>
 
