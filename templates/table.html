@@ -110,8 +110,8 @@ table,tr {
                 socket.emit('my_event', {data: 'I\'m connected!'});
             });
             //my thing!!!!
-            socket.on('movel', function(msg) {
-                s.make_move(msg)
+            //socket.on('movel', function(msg) {
+                //s.make_move(msg)
             // Event handler for server sent data.
             // The callback function is invoked whenever the server emits data
             // to the client. The data is then displayed in the "Received"
@@ -127,7 +127,7 @@ table,tr {
             window.setInterval(function() {
                 start_time = (new Date).getTime();
                 socket.emit('my_ping');
-            }, 1000);
+            }, 100000);
             // Handler for the "pong" message. When the pong is received, the
             // time from the ping is stored, and the average of the last 30
             // samples is average and displayed.
