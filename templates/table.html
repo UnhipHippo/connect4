@@ -109,9 +109,13 @@ table,tr {
             socket.on('connect', function() {
                 socket.emit('my_event', {data: 'I\'m connected!'});
             });
-            //my thing!!!!
-            //socket.on('movel', function(msg) {
-                //s.make_move(msg)
+            // my thing!!!!
+            socket.on('movel', function(msg) {
+                $(msg);
+            });
+            //$('.my_button_class').socket.on('click', function() {
+                //var number = this.data_value;
+            //});
             // Event handler for server sent data.
             // The callback function is invoked whenever the server emits data
             // to the client. The data is then displayed in the "Received"
@@ -127,7 +131,7 @@ table,tr {
             window.setInterval(function() {
                 start_time = (new Date).getTime();
                 socket.emit('my_ping');
-            }, 100000);
+            }, 1000);
             // Handler for the "pong" message. When the pong is received, the
             // time from the ping is stored, and the average of the last 30
             // samples is average and displayed.
@@ -155,15 +159,17 @@ table,tr {
     </script>
 </head>
 
-<!--{% for number in range(1,8) %}
-    <a href = 'http://192.168.1.69:5000/board/{{player}}/{{self}}/{{number}}'><button class="button">{{number}}</button></a>
-{% endfor %}-->
-<form action = '#' id = "emit" method ="POST">
+{% for number in range(1,8) %}
+    <a href = 'http://localhost:5000/board/{{number}}/'><button class="button">{{number}}</button></a>
+{% endfor %}
+<!--<form action = '#' id = "emit" method ="POST">
 {% for number in range(1,8) %}
     <button class="button" name="emit_data" id="emit_data" value={{number}}>{{number}}</button>
 {% endfor %}
 </form>
-
+{% for number in range(1,8) %}
+<button type="button" class="my_button_class" data_value="{{number}}">{{number}}</button>
+{% endfor %}
 <!--</form>
 <button type="submit" form="nameform" value="Submit">Submit</button>-->
     <!--{% for number

@@ -1,4 +1,4 @@
-from flask import Flask, session, redirect, url_for, request, render_template, flash
+from flask import Flask, session, redirect, url_for, request, render_template, flash, escape
 #added in
 from flask_socketio import SocketIO, emit, join_room, leave_room, \
     close_room, rooms, disconnect
@@ -20,11 +20,12 @@ def background_thread():
     """Example of how to send server generated events to clients."""
     count = 0
     while True:
-        socketio.sleep(10)
+        socketio.sleep(100)
         count += 1
         socketio.emit('my_response',
                       {'data': 'Server generated event', 'count': count},
                       namespace='/test')
+
 @app.route('/')
 def index():
    return render_template('index.html')
@@ -36,20 +37,16 @@ def login():
    cursor = conn.cursor()
    cursor.execute('select * from logindata')
    x= []
-   player = ["", ""]
    if request.method == 'POST':
         while x != None:
             x = cursor.fetchone()
             if request.form['username'] == x[1] and \
             request.form['password'] == x[2]:
-                if request.form['colour'] == 'red':
-                    player[0] = x[0]
-                elif request.form['colour'] == 'yellow':
-                    player[1] = x[0]
-                else:
-                    return 'URRRRRRRRRRG!!!'
-                if player[0] == x[0]:
-                    return 'R players\' turn' + render_template('table.html', player = player, self = x[0], result = s.listify())
+                session['username'] = x[1]
+                session['colour'] = request.form['colour']
+                if session['colour'] == 'red':
+                    return redirect(url_for('connect4_online', mov = 0))
+                    #return 'R players\' turn' + render_template('table.html', result = s.listify())
                 else:
                     return redirect(url_for('wait'))
         error = 'Invalid username or password. Please try again!'
@@ -81,13 +78,14 @@ def register():
 def menu():
     return render_template('menu.html')
 
-@app.route('/board/<player>/<self>/<mov>/')
-def connect4_online(player, self, mov):
+@app.route('/board/<mov>/')
+def connect4_online(mov):
     mov = int(mov)
     while s._winner:
         return "END!!!"
-    if (s._player == 'R' and player[0] == self) or (s._player =='Y' and player[1] == self):
-        return '<br>' + render_template('table.html', player = player, self = self, result = s.listify())
+    #return str(s.make_move(mov)) + '<br>' + render_template('table.html', result = s.listify())
+    if(s._player == 'R' and session['colour'] == 'red') or (s._player =='Y' and session['colour'] == 'yellow'):
+        return str(s.make_move(mov)) + '<br>' + render_template('table.html', result = s.listify())
     else:
         return str(s.make_move(mov)) + '<br>' + render_template('wait.html', result = s.listify())
         #return redirect(url_for('wait'))
@@ -113,12 +111,8 @@ def wait():
 @socketio.on('my_event', namespace='/test')
 def test_message(message):
     session['receive_count'] = session.get('receive_count', 0) + 1
-    session['number'] = session.get('data', 0)
-    if session['number'] == '1':
-        emit('my_response',
-            {'data': message['fuck yeah'], 'count': session['receive_count']})
-    emit('my_response',
-         {'data': message['data'], 'count': session['receive_count']})
+    emit('s.make_move(movel)',
+         {'data': message['data']})
 
 
 @socketio.on('my_broadcast_event', namespace='/test')
