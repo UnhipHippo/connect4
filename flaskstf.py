@@ -94,7 +94,7 @@ def connect4_online(move):
     if move == 0:
         return board.current_turn_string() + '<br>' + render_template('table.html', result = board.listify(), board = board)
     #if session['board_index']._winner:
-    #    return "END!!!" #TODO redirect to end pagw
+    #    return "END!!!" #TODO redirect to end page
     if board.is_current_player(session['username']):
         raise NotYourTurn()
     else:
