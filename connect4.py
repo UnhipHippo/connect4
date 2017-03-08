@@ -16,9 +16,9 @@ class FourInARowBoard(object):
     def __init__(self):
         self._setup_board()
         self._winner = None
-        self._player = 'sam'
-        self._red = RED
-        self._yellow = YELLOW
+        self._player = None
+        self._red = None
+        self._yellow = None
 
     def make_move(self, column):
         try:
