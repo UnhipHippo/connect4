@@ -53,9 +53,9 @@ table,tr {
             <tr>
                 {% for column in row %}
                         <td>
-                            {% if column == 'R' %}
+                            {% if board.is_red(column) %}
                                 <div class="circle_red"></div>
-                            {% elif column == 'Y' %}
+                            {% elif board.is_yellow(column) %}
                                 <div class="circle_yellow"></div>
                             {% else %}
                                 <div class="circle_clear"></div>
@@ -160,7 +160,7 @@ table,tr {
 </head>
 
 {% for number in range(1,8) %}
-    <a href = 'http://localhost:5000/board/{{number}}/'><button class="button">{{number}}</button></a>
+    <a href = 'http://192.168.1.69:5000/board/{{number}}/'><button class="button">{{number}}</button></a>
 {% endfor %}
 <!--<form action = '#' id = "emit" method ="POST">
 {% for number in range(1,8) %}

@@ -2,8 +2,8 @@
 NUM_COL = 8
 NUM_ROW = 7
 EMPTY = " "
-RED = 'R'
-YELLOW = 'Y'
+RED = "red"
+YELLOW = "yellow"
 SIDE_EDGE = "\n"
 
 DIRECTIONS = [NUM_COL, +1, NUM_COL-1, NUM_COL+1]
@@ -16,7 +16,9 @@ class FourInARowBoard(object):
     def __init__(self):
         self._setup_board()
         self._winner = None
-        self._player = RED
+        self._player = 'sam'
+        self._red = RED
+        self._yellow = YELLOW
 
     def make_move(self, column):
         try:
@@ -25,7 +27,7 @@ class FourInARowBoard(object):
             return 'Invalid Move'
         if self._winner:
             return 'Woo %s has won' % self._winner
-        return self._swap_player()
+        self._swap_player()
        
     def _setup_board(self):
         self._board = [EMPTY] * (NUM_COL * NUM_ROW)
@@ -58,12 +60,32 @@ class FourInARowBoard(object):
             newlist.append(lst)
         return newlist
 
+    def set_first_player(self, username):
+        self._red = username
+        self._player = username
+
+    def set_second_player(self, username):
+        self._yellow = username
+
+    def has_both_players(self):
+        return self._red is not None and self._yellow is not None
+
+    def is_current_player(self, username):
+        return username is self._player
+
+    def is_red(self, username):
+        return username is self._red
+
+    def is_yellow(self, username):
+        return username is self._yellow
 
     def _swap_player(self):
-        if self._player == RED:
-            self._player = YELLOW
+        if self._player == self._red:
+            self._player = self._yellow
         else:
-             self._player = RED
+             self._player = self._red
+
+    def current_turn_string(self):
         return '%s players\' turn' % (self._player)
 
     def _all_squares(self):
