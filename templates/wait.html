@@ -39,19 +39,6 @@
             }
         </style>
     </head>
-    <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script>
-    $(document).ready(function(){
-        var board = result
-        $("button").click(function(){
-            $.get(s.listify, function(data, status){
-                alert("Data: " + data + "\nStatus: " + status);
-            });
-        });
-    });
-    </script>
-    </head>
 <head>
 <style>
 table,tr {
@@ -83,12 +70,11 @@ table,tr {
 <head>
 <style>
 .button {
-    background-color: #4CAF50; /* Green */
+    background-color: #4CAF50;
     border: 1px solid green;
     color: white;
     padding: 15px 32px;
     text-align: center;
-    text-decoration: none;
     display: inline-block;
     font-size: 16px;
     cursor: pointer;
@@ -99,7 +85,7 @@ table,tr {
     background-color: #3e8e41;
 }
 .disabled {
-    opacity: 0.6;
+    opacity: 0.7;
     cursor: not-allowed;
 }
 
@@ -110,7 +96,7 @@ table,tr {
 {% for number in range(1,8) %}
     <a><button class="button disabled">{{number}}</button></a>
 {% endfor %}
-<p><a href = "{{ url_for('wait') }}"><button id="action-button">Click me to load info!</button></a></p>
+<p><br><br><br><a href = "{{ url_for('wait') }}"><button class = button>Click me to load info!</button></a></p>
 <div id="info"></div>
 
 </body>

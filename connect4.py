@@ -2,8 +2,6 @@
 NUM_COL = 8
 NUM_ROW = 7
 EMPTY = " "
-RED = "red"
-YELLOW = "yellow"
 SIDE_EDGE = "\n"
 
 DIRECTIONS = [NUM_COL, +1, NUM_COL-1, NUM_COL+1]
@@ -71,7 +69,7 @@ class FourInARowBoard(object):
         return self._red is not None and self._yellow is not None
 
     def is_current_player(self, username):
-        return username is self._player
+        return username == self._player
 
     def is_red(self, username):
         return username is self._red
@@ -79,14 +77,18 @@ class FourInARowBoard(object):
     def is_yellow(self, username):
         return username is self._yellow
 
+    def game_won(self):
+        return self._winner
+
+
     def _swap_player(self):
         if self._player == self._red:
             self._player = self._yellow
         else:
-             self._player = self._red
+            self._player = self._red
 
     def current_turn_string(self):
-        return '%s players\' turn' % (self._player)
+        return '%s\'s turn' % (self._player)
 
     def _all_squares(self):
         start = NUM_COL * NUM_ROW -1
