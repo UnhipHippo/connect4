@@ -100,3 +100,10 @@ def hub():
             return redirect(url_for('wait'))
     else:
         return render_template('hub.html')
+
+@app.route('/newgame')
+def new_game():
+    board_store.join_game(session['username'])
+    board_index = board_store.index
+    session['board_index'] = board_index
+    return redirect(url_for('hub'))
